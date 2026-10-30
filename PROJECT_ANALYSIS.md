@@ -1,6 +1,6 @@
 # MOP-01 — prvotní analýza projektu
 
-Datum založení analýzy: 27. 10. 2026. Aktuální stav k 30. 10. 2026: konzolový Kotlin/JVM program je úspěšně přeložený a spuštěný, Git je založený na větvi `main` bez prvního commitu, pravidla ignorování jsou ověřená. Před commitem zbývá vyřadit ignorované soubory z indexu a připravit aktuální verze souborů. Gradle, desktopové okno a audio nejsou implementované. Pracovní název vychází z názvu složky; finální název produktu není rozhodnutý. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md), postup v [MVP_ROADMAP.md](MVP_ROADMAP.md).
+Datum založení analýzy: 27. 10. 2026. Aktuální stav k 30. 10. 2026: konzolový Kotlin/JVM program je úspěšně přeložený a spuštěný, pravidla ignorování jsou ověřená a na větvi `main` existuje první commit `b0a3939` (`initial commit`). Michael chce před Gradlem nahrát tento základ na GitHub; vzdálený repozitář zatím není připojený a push není ověřený. Gradle, desktopové okno a audio zatím nejsou implementované. Pracovní název vychází z názvu složky; finální název produktu není rozhodnutý. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md), postup v [MVP_ROADMAP.md](MVP_ROADMAP.md).
 
 ## 1. Vize a potvrzené zadání
 
@@ -84,6 +84,22 @@ Další krok je založení lokálního Gitu, ruční příprava pravidel ignorov
 Následná kontrola potvrzuje Git na větvi `main` bez commitů a nově vytvořený `.gitignore`. Jeho první verze obsahuje pravidlo pro `.env` a nepřesně zapsaný název souboru macOS. Je potřeba opravit velikost písmen názvu `.DS_Store` a doplnit ignorování výstupní složky `out` a osobního nastavení `.idea/workspace.xml`. V indexu už jsou připravené i přeložené soubory a soubor workspace; před prvním commitem je Michael vyřadí z indexu se zachováním lokálních souborů. AI `.gitignore` ani Git index neupravuje.
 
 Po Michaelově úpravě jsou pravidla pro `.DS_Store`, `.env`, `out` a `.idea/workspace.xml` ověřená pomocí čtecí kontroly `git check-ignore` bez použití indexu. Zdrojový soubor, pravidla spolupráce ani samotný `.gitignore` tato pravidla nevylučují. Ignorované build výstupy a workspace však zatím stále zůstávají v indexu; workspace má navíc změny od posledního přidání. Dalším krokem je cílené vyřazení těchto položek pouze z indexu, nové přidání aktuálních zdrojů a dokumentace a kontrola připraveného obsahu. AI žádný z těchto zápisů do Gitu neprovádí.
+
+### První commit a přechod na Gradle 30. 10. 2026
+
+Michael vytvořil commit `b0a3939` s názvem `initial commit`. Kontrola obsahu potvrzuje zahrnutí zdroje, `.gitignore`, dokumentace a potřebné dosavadní projektové konfigurace; výstupy `out` a osobní `.idea/workspace.xml` v commitu nejsou. Před následnou aktualizací těchto dokumentů byl pracovní strom čistý. Další změny dokumentace zaznamenávají nový stav a nejsou samy dalším commitem.
+
+V projektu zatím nejsou build soubory ani Gradle Wrapper; příkaz `gradle` se nenašel v aktuálním PATH. To nevylučuje instalaci mimo PATH nebo možnost stažení prostřednictvím IDE.
+
+Pro první ručně psanou Kotlin/JVM konfiguraci je doporučeným kandidátem Kotlin Gradle plugin 2.4.21 s Gradlem 9.7.0 a instalovaným JDK 26. Tabulka Kotlinu uvádí plnou podporu Gradlu do 9.7.0 pro KGP 2.4.21; Gradle uvádí běh na JDK 26 od 9.4.0. Je to ověření dokumentované kompatibility pro konzolový základ, nikoli provedený build nebo schválená finální kombinace s Compose. [Kompatibilita Kotlin pluginu](https://kotlinlang.org/docs/gradle-configure-project.html), [kompatibilita Javy a Gradlu](https://docs.gradle.org/current/userguide/compatibility.html)
+
+Další malý úkol je ručně vytvořit v kořeni `settings.gradle.kts` a pojmenovat kořenový projekt. Následují postupně vysvětlený `build.gradle.kts`, zpřístupnění připnuté verze Gradlu a Wrapperu, standardní umístění zdroje, aktualizace ignorování pro Gradle a ověření sestavení a běhu. Každý krok provede Michael; AI dodává výklad a review. Wrapper je podpůrný výstup oficiálního nástroje, jeho případné vytvoření nástrojem provede Michael vědomě; AI jej negeneruje a nevyužije generátor k vytvoření aplikační implementace.
+
+### Priorita prvního nahrání na GitHub
+
+Michael následně upřesnil, že chce před konfigurací Gradlu uložit aktuální základ také na GitHub. Lokální `main` zatím nemá nastavený remote ani upstream. Existující commit je zkontrolovaný; ignorované build výstupy a workspace v něm nejsou. Dva dokumenty se po commitu průběžně změnily a jejich aktuální verze se odešlou až po dalším Michaelově commitu. GitHub CLI je dostupné v PATH; stav přihlášení ani existence dosud nepřipojeného online repozitáře nebyly ověřené.
+
+Nejbližší uživatelský krok je vytvořit prázdný GitHub repozitář pod zvoleným názvem a viditelností, bez inicializace README, licence a dalšího `.gitignore`, a předat jeho URL. Potom Michael připojí remote, případně uloží aktuální dokumentaci a provede první push větve `main` s nastavením upstreamu. AI pouze navede a ověří výsledek; sama GitHub repozitář nezakládá ani neprovádí push. Po ověření nahrání se vrátíme k naplánované ruční konfiguraci Gradlu.
 
 ## 3. Co má první MVP přinést
 
