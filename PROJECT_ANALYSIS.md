@@ -1,6 +1,6 @@
 # MOP-01 — prvotní analýza projektu
 
-Datum založení analýzy: 27. 10. 2026. Aktuální stav k 30. 10. 2026: konzolový Kotlin/JVM program je úspěšně přeložený a spuštěný, pravidla ignorování jsou ověřená a na větvi `main` existuje první commit `b0a3939` (`initial commit`). Michael chce před Gradlem nahrát tento základ na GitHub; vzdálený repozitář zatím není připojený a push není ověřený. Gradle, desktopové okno a audio zatím nejsou implementované. Pracovní název vychází z názvu složky; finální název produktu není rozhodnutý. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md), postup v [MVP_ROADMAP.md](MVP_ROADMAP.md).
+Datum založení analýzy: 27. 10. 2026. Aktuální stav k 30. 10. 2026: konzolový Kotlin/JVM program je úspěšně přeložený a spuštěný, pravidla ignorování jsou ověřená, první commit je `b0a3939` (`initial commit`). GitHub základ je připojený přes `origin` na `https://github.com/michaelptacek05/mop-01.git`; lokální `main` sleduje `origin/main` a při kontrole odpovídá commitu `1c81c76` (`uprava md`). Následuje ruční konfigurace Gradlu; desktopové okno a audio zatím nejsou implementované. Pracovní název vychází z názvu složky; finální název produktu není rozhodnutý. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md), postup v [MVP_ROADMAP.md](MVP_ROADMAP.md).
 
 ## 1. Vize a potvrzené zadání
 
@@ -100,6 +100,26 @@ Další malý úkol je ručně vytvořit v kořeni `settings.gradle.kts` a pojme
 Michael následně upřesnil, že chce před konfigurací Gradlu uložit aktuální základ také na GitHub. Lokální `main` zatím nemá nastavený remote ani upstream. Existující commit je zkontrolovaný; ignorované build výstupy a workspace v něm nejsou. Dva dokumenty se po commitu průběžně změnily a jejich aktuální verze se odešlou až po dalším Michaelově commitu. GitHub CLI je dostupné v PATH; stav přihlášení ani existence dosud nepřipojeného online repozitáře nebyly ověřené.
 
 Nejbližší uživatelský krok je vytvořit prázdný GitHub repozitář pod zvoleným názvem a viditelností, bez inicializace README, licence a dalšího `.gitignore`, a předat jeho URL. Potom Michael připojí remote, případně uloží aktuální dokumentaci a provede první push větve `main` s nastavením upstreamu. AI pouze navede a ověří výsledek; sama GitHub repozitář nezakládá ani neprovádí push. Po ověření nahrání se vrátíme k naplánované ruční konfiguraci Gradlu.
+
+Dokončení tohoto kroku 30. 10. 2026: Michael potvrdil dokončení a lokální kontrola ukazuje remote `origin` s adresou `https://github.com/michaelptacek05/mop-01.git`, větev `main` s upstreamem `origin/main` bez indikovaného rozdílu a commit `1c81c76` (`uprava md`). Pracovní strom byl před zapsáním tohoto záznamu čistý. Základ na GitHub nahrál Michael; AI pouze zkontrolovala lokální stav. Viditelnost online repozitáře nebyla zjišťována. Záznam o dokončení v těchto dokumentech může být součástí dalšího commitu při práci na Gradlu; není nutné kvůli každému záznamu přerušovat implementaci dalším commitem.
+
+### První soubor konfigurace Gradlu
+
+Michael vytvořil kořenový `settings.gradle.kts` a po review sám opravil jednoduché uvozovky na dvojité. Čtením ověřeno správné nastavení jména kořenového projektu na `mop-01`. Rozdíl mezi znakem a řetězcem byl vysvětlen s návazností na zkušenosti s TypeScriptem. Gradle zatím spuštěný nebyl a `build.gradle.kts` ani Wrapper dosud neexistují.
+
+Další úkol je ručně založit kořenový `build.gradle.kts` a podle dokumentace zapsat blok pluginů s Kotlin/JVM pluginem verze 2.4.21. Mentor vysvětlí, že plugin dodává Gradlu podporu překladu Kotlinu pro JVM. Toto je první část build konfigurace, nikoli hotový spustitelný Gradle projekt. Následující části a ověření přidáme až po review Michaelova zápisu. [Kotlin/JVM Gradle plugin](https://kotlinlang.org/docs/gradle-configure-project.html#targeting-the-jvm)
+
+### Průběžné review build skriptu 31. 10. 2026
+
+Michael vytvořil `build.gradle.kts` a postupně sám doplnil Kotlin/JVM plugin 2.4.21, plugin `application` a Maven Central v samostatném bloku repozitářů. Po opravě původního zápisu Groovy na Kotlin DSL je zápis těchto částí správný při čtecím review. Gradle nebyl spuštěný; nejde o důkaz dokončeného sestavení ani spuštění aplikace.
+
+Další malý úkol je explicitní JVM toolchain pro instalované JDK 26. Nastavení má sjednotit cílovou JVM verzi Kotlinu a Javy a vyjádřit požadované JDK v projektu. Verze JDK a verze Kotlin pluginu jsou samostatné údaje. Podpora Java 26 je dokumentovaná od Kotlinu 2.4.0; praktické použití v tomto projektu zatím ověřené není. Vstupní třída aplikace, dostupnost Gradlu/Wrapperu, standardní umístění zdroje a ignorování nových build výstupů zůstávají k dokončení. [JVM toolchain](https://kotlinlang.org/docs/gradle-configure-project.html#gradle-java-toolchains-support), [podpora Java 26](https://kotlinlang.org/docs/whatsnew24.html#kotlin-jvm)
+
+### První verze konzolového build skriptu 31. 10. 2026
+
+Michael následně doplnil JVM toolchain 26 a opravil ukázkovou vstupní třídu na `MainKt`. Tyto hodnoty jsou zkontrolované čtením. Vysvětlili jsme, že `mainClass` je název konfigurační vlastnosti a `MainKt` její hodnota; Kotlin do této JVM třídy překládá funkce z aktuálního souboru `Main.kt`, který nemá deklaraci balíčku ani vlastní JVM název. Nejde dosud o ověřený Gradle build.
+
+Zdroj zůstává v `src/Main.kt`, zatímco výchozí umístění Kotlin zdrojů pro Gradle je `src/main/kotlin`. Další malý úkol provede Michael: přesun existujícího souboru do `src/main/kotlin/Main.kt`. Samotný přesun bez změny balíčku nebo názvu souboru nemění vstupní třídu `MainKt`. [Umístění zdrojů](https://kotlinlang.org/docs/gradle-configure-project.html#kotlin-and-java-sources), [funkce na úrovni souboru a JVM třídy](https://kotlinlang.org/docs/java-to-kotlin-interop.html#package-level-functions)
 
 ## 3. Co má první MVP přinést
 

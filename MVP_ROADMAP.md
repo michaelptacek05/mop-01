@@ -1,6 +1,6 @@
 # MOP-01 — cesta k prvnímu MVP
 
-Datum založení: 27. 10. 2026. Stav k 30. 10. 2026: konzolový Kotlin/JVM program úspěšně přeložený a spuštěný; ignorování ověřené, první commit `b0a3939` existuje na větvi `main`. Michael chce nyní nejprve nahrát základ na GitHub, potom pokračovat ručním přechodem na Gradle. Remote a push zatím nejsou hotové. Okno a hudební implementace nezačaly. Kód i konfigurace píše Michael; mentor poskytuje vysvětlení a review podle [AGENTS.md](AGENTS.md). Kontext a rozlišení požadavků od doporučení jsou v [PROJECT_ANALYSIS.md](PROJECT_ANALYSIS.md).
+Datum založení: 27. 10. 2026. Stav k 30. 10. 2026: konzolový Kotlin/JVM program úspěšně přeložený a spuštěný, ignorování ověřené a základ nahraný na GitHub `michaelptacek05/mop-01`. `main` sleduje `origin/main`; při kontrole obě odpovídají commitu `1c81c76`. Následuje ruční přechod na Gradle. Okno a hudební implementace nezačaly. Kód i konfigurace píše Michael; mentor poskytuje vysvětlení a review podle [AGENTS.md](AGENTS.md). Kontext a rozlišení požadavků od doporučení jsou v [PROJECT_ANALYSIS.md](PROJECT_ANALYSIS.md).
 
 ## Cíl a způsob postupu
 
@@ -15,7 +15,7 @@ Milníky níže jsou plán, nikoli dokončená práce. Návrhové detaily rozsah
 | Milník | Výsledek | Stav |
 | --- | --- | --- |
 | M0 — zadání a prostředí | Známé podmínky, potvrzená první technická cesta | Prostředí doplněno, technická cesta otevřená |
-| M1 — základ aplikace | Ručně založená a pochopená aplikace s oknem | Konzolový program, ignorování a první commit hotové; další krok Gradle, okno neimplementované |
+| M1 — základ aplikace | Ručně založená a pochopená aplikace s oknem | Konzolový program, ignorování, commity a GitHub základ hotové; další krok Gradle, okno neimplementované |
 | M2 — první zvuk | Ověřená cesta od vlastního signálu k reproduktoru | Nezahájeno |
 | M3 — hratelný synth | Tóny, vstupy, hlasitost a životní cyklus fungují společně | Nezahájeno |
 | M4 — ověření MVP | Opakovatelně fungující desktopový nástroj | Nezahájeno |
@@ -30,7 +30,7 @@ Michael uvedl macOS 27.0, MacBook Pro s Apple M4 Pro, 24 GB RAM a vestavěné re
 
 **Hotovo, když:** je vybraná desktopová cesta, víme, na jakém zařízení ji ověřujeme, a Michael dokáže říct, co má dodat UI framework a co musí řešit zvuková vrstva.
 
-**Aktuální nejbližší úkol (30. 10. 2026):** podle Michaelova upřesnění nejprve nahrát ověřený základ na GitHub. Michael vytvoří prázdný repozitář s vlastní volbou viditelnosti a předá jeho URL. Potom pod vedením připojí remote a provede první push `main` s upstreamem; aktuální změny dokumentace se odešlou až po jejich commitu. Remote zatím není nastavený a push není ověřený. Následujícím implementačním úkolem zůstává ručně vytvořit `settings.gradle.kts` a pojmenovat projekt `mop-01`, potom postupně připravit build konfiguraci a ověřit konzolový program přes Gradle.
+**Aktuální nejbližší úkol (31. 10. 2026):** Michaelova první konfigurace konzolového Gradle projektu je zkontrolovaná čtením: název projektu, Kotlin/JVM 2.4.21, `application`, Maven Central, JVM toolchain 26 a vstupní třída `MainKt`. Sestavení přes Gradle zatím ověřené není. Další malý úkol je přesunout existující `src/Main.kt` do výchozího umístění `src/main/kotlin/Main.kt`. Potom zbývá připravit ignorování Gradle výstupů, kompatibilní Gradle/Wrapper a ověřit konzolový běh před přidáváním UI a audia.
 
 ## M1 — pochopit a ručně založit základ aplikace
 
@@ -141,3 +141,7 @@ Po doloženém dokončení upravíme stav příslušného milníku a do této č
 - 30. 10. 2026: upravený `.gitignore` ověřený pomocí kontroly pravidel pro výstupy, macOS soubor, workspace a `.env`. Zdrojový kód a dokumentace zůstávají zahrnutelné do historie. Vyřazení již připravených ignorovaných souborů a první commit zatím neprovedené.
 - 30. 10. 2026: první commit `b0a3939` (`initial commit`) ověřený; v historii nejsou build výstupy ani osobní workspace. Přecházíme k ručně psané konfiguraci Gradlu; první úkol je pojmenování projektu v `settings.gradle.kts`. Gradle není dostupný v kontrolovaném PATH a Wrapper zatím neexistuje.
 - 30. 10. 2026: Michael požádal před Gradlem nejprve o nahrání základu na GitHub. Remote chybí, první push zatím neproběhl. Nejbližší krok je založení prázdného online repozitáře a získání URL; jeho viditelnost vybere Michael. AI dále pracuje jako mentor a push neprovádí.
+- 30. 10. 2026: Michael dokončil nahrání na GitHub. Lokálně ověřený `origin` na `michaelptacek05/mop-01`, upstream `main` → `origin/main`, commit `1c81c76` (`uprava md`) a čistý pracovní strom před aktualizací dokumentace. Další praktický krok je `settings.gradle.kts`.
+- 30. 10. 2026: `settings.gradle.kts` vytvořený a po Michaelově opravě uvozovek správný při čtecím review. Gradle samotný zatím není spuštěný. Další úkol je první část `build.gradle.kts`: Kotlin/JVM plugin v bloku pluginů.
+- 31. 10. 2026: Michael doplnil Kotlin/JVM plugin, `application` a Maven Central v `build.gradle.kts`. Zápis těchto bloků je při čtecím review správný; sestavení ještě neproběhlo. Nejbližší krok je explicitní JVM toolchain pro JDK 26.
+- 31. 10. 2026: JVM toolchain 26 a vstupní třída `MainKt` doplněné Michaelem a zkontrolované čtením. Byl vysvětlen rozdíl mezi názvem vlastnosti a hodnotou i odvození názvu JVM třídy ze souboru. Zdroj stále leží v `src/Main.kt`; dalším krokem je jeho přesun do standardního umístění Gradlu.
