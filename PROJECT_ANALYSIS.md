@@ -121,6 +121,10 @@ Michael následně doplnil JVM toolchain 26 a opravil ukázkovou vstupní tříd
 
 Zdroj zůstává v `src/Main.kt`, zatímco výchozí umístění Kotlin zdrojů pro Gradle je `src/main/kotlin`. Další malý úkol provede Michael: přesun existujícího souboru do `src/main/kotlin/Main.kt`. Samotný přesun bez změny balíčku nebo názvu souboru nemění vstupní třídu `MainKt`. [Umístění zdrojů](https://kotlinlang.org/docs/gradle-configure-project.html#kotlin-and-java-sources), [funkce na úrovni souboru a JVM třídy](https://kotlinlang.org/docs/java-to-kotlin-interop.html#package-level-functions)
 
+Následné ověření 31. 10. 2026: Michael přesun dokončil. Ve zdrojovém stromu je jediný `Main.kt` na cestě `src/main/kotlin/Main.kt`, obsah konzolového programu zůstal zachovaný a Git přesun rozpoznává. V pracovním stromu se již objevila `.gradle`, kterou současný `.gitignore` nepokrývá. Její existence sama nedokládá úspěšné sestavení nebo synchronizaci. Další malý úkol je doplnit ignorování `.gradle`, `.kotlin` a `build`; pravidla napíše Michael. [Adresáře Gradlu](https://docs.gradle.org/current/userguide/directory_layout.html), [lokální data Kotlin pluginu](https://kotlinlang.org/docs/gradle-configure-project.html#kotlin-gradle-plugin-data-in-a-project)
+
+Ověření 2. 11. 2026: Michael doplnil `.gitignore` o `.gradle`, `.kotlin` a `build`. Čtecí kontrola pomocí `git check-ignore --no-index -v` potvrdila odpovídající pravidla pro cesty uvnitř všech tří adresářů; zdrojový soubor a oba build skripty pravidlům nepodléhají. Adresáře nejsou v Git indexu a `.gradle` se již neobjevuje mezi nesledovanými soubory. Další krok je dostupnost kompatibilního Gradlu/Wrapperu a propojení s IDE; úspěšné sestavení zatím doložené není.
+
 ## 3. Co má první MVP přinést
 
 První uživatelský scénář: Michael spustí macOS aplikaci, vědomě zapne zvuk, zahraje několik tónů klávesnicí, změní hlasitost a vše spolehlivě umlčí. Dokáže vlastními slovy vysvětlit, jak se stisk klávesy promění ve zvuk.

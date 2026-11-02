@@ -30,7 +30,7 @@ Michael uvedl macOS 27.0, MacBook Pro s Apple M4 Pro, 24 GB RAM a vestavěné re
 
 **Hotovo, když:** je vybraná desktopová cesta, víme, na jakém zařízení ji ověřujeme, a Michael dokáže říct, co má dodat UI framework a co musí řešit zvuková vrstva.
 
-**Aktuální nejbližší úkol (31. 10. 2026):** Michaelova první konfigurace konzolového Gradle projektu je zkontrolovaná čtením: název projektu, Kotlin/JVM 2.4.21, `application`, Maven Central, JVM toolchain 26 a vstupní třída `MainKt`. Sestavení přes Gradle zatím ověřené není. Další malý úkol je přesunout existující `src/Main.kt` do výchozího umístění `src/main/kotlin/Main.kt`. Potom zbývá připravit ignorování Gradle výstupů, kompatibilní Gradle/Wrapper a ověřit konzolový běh před přidáváním UI a audia.
+**Aktuální nejbližší úkol (2. 11. 2026):** Michaelova první konfigurace konzolového Gradle projektu je zkontrolovaná čtením: název projektu, Kotlin/JVM 2.4.21, `application`, Maven Central, JVM toolchain 26 a vstupní třída `MainKt`. Přesun zdroje do `src/main/kotlin/Main.kt` je ověřený, obsah zůstal zachovaný. Michael doplnil ignorování `.gradle`, `.kotlin` a `build`; účinek pravidel je ověřený, zdroje a build skripty ignorované nejsou. Sestavení přes Gradle zatím ověřené není. Další krok je zjistit současnou dostupnost Gradlu a stav propojení s IDE, připravit kompatibilní Gradle/Wrapper a ověřit konzolový běh před přidáváním UI a audia.
 
 ## M1 — pochopit a ručně založit základ aplikace
 
@@ -145,3 +145,4 @@ Po doloženém dokončení upravíme stav příslušného milníku a do této č
 - 30. 10. 2026: `settings.gradle.kts` vytvořený a po Michaelově opravě uvozovek správný při čtecím review. Gradle samotný zatím není spuštěný. Další úkol je první část `build.gradle.kts`: Kotlin/JVM plugin v bloku pluginů.
 - 31. 10. 2026: Michael doplnil Kotlin/JVM plugin, `application` a Maven Central v `build.gradle.kts`. Zápis těchto bloků je při čtecím review správný; sestavení ještě neproběhlo. Nejbližší krok je explicitní JVM toolchain pro JDK 26.
 - 31. 10. 2026: JVM toolchain 26 a vstupní třída `MainKt` doplněné Michaelem a zkontrolované čtením. Byl vysvětlen rozdíl mezi názvem vlastnosti a hodnotou i odvození názvu JVM třídy ze souboru. Zdroj stále leží v `src/Main.kt`; dalším krokem je jeho přesun do standardního umístění Gradlu.
+- 31. 10. 2026: přesun do `src/main/kotlin/Main.kt` ověřený čtením souboru i Git statusem, který jej rozpoznává jako přejmenování/přesun. `.gradle` již existuje a není ignorovaná. Další úkol je doplnění `.gitignore` pro lokální data Gradlu/Kotlinu a build výstupy.
