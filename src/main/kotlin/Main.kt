@@ -9,5 +9,4 @@ fun main(): Unit = singleWindowApplication {
     Button( onClick = { helloWorld.value = "Pressed"}){
         Text(helloWorld.value)
     }
-
 }

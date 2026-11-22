@@ -1,6 +1,6 @@
 # MOP-01 — cesta k prvnímu MVP
 
-Roadmapa vznikla 27. 10. 2026. K 22. 11. 2026 Michael potvrdil otevření prvního okna Compose s textem. Další dílčí cíl je viditelná reakce na kliknutí. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md) a technické souvislosti v [PROJECT_ANALYSIS.md](PROJECT_ANALYSIS.md).
+Roadmapa vznikla 27. 10. 2026. K 22. 11. 2026 Michael ověřil otevření okna, změnu popisku tlačítka a ukončení aplikace po zavření okna. Další dílčí cíl je první zvuk. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md) a technické souvislosti v [PROJECT_ANALYSIS.md](PROJECT_ANALYSIS.md).
 
 ## Cíl a způsob postupu
 
@@ -15,8 +15,8 @@ Milníky níže jsou plán, nikoli dokončená práce. Návrhové detaily rozsah
 | Milník | Výsledek | Stav |
 | --- | --- | --- |
 | M0 — zadání a prostředí | Známé podmínky, potvrzená první technická cesta | Prostředí doplněno, technická cesta otevřená |
-| M1 — základ aplikace | Ručně založená a pochopená aplikace s oknem | Otevření okna a zobrazení textu potvrzené. Následuje první interakce a ověření ukončení aplikace. |
-| M2 — první zvuk | Ověřená cesta od vlastního signálu k reproduktoru | Nezahájeno |
+| M1 — základ aplikace | Ručně založená a pochopená aplikace s oknem | Spuštění, reakce na kliknutí a ukončení ověřené Michaelem. |
+| M2 — první zvuk | Ověřená cesta od vlastního signálu k reproduktoru | Následuje výpočet vzorků prvního tónu. |
 | M3 — hratelný synth | Tóny, vstupy, hlasitost a životní cyklus fungují společně | Nezahájeno |
 | M4 — ověření MVP | Opakovatelně fungující desktopový nástroj | Nezahájeno |
 | W1 — webový protějšek | Základní nástroj v Next.js | Po desktopovém MVP |
@@ -38,13 +38,13 @@ Učivo průběžně podle potřeby: základní syntaxe Kotlinu, typy a nullabili
 
 Michael sám připraví projektové a build soubory. Případný oficiální generátor si zvolí vědomě; automaticky vytvořenou kostru budeme rozlišovat od jím napsané implementace. Pokud chce doslova ručně psát i veškerou kostru, zvolíme ruční založení. AI generátor nespouští a soubory nevytváří.
 
-**Doporučený nejbližší úkol (22. 11. 2026)** je přidat tlačítko, které po kliknutí změní text v okně. Při stejném spuštění lze ověřit, že se po zavření okna příkaz `./gradlew run` ukončí.
-
 **Hotovo, když:** aplikaci Michael opakovaně spustí a zavře, jedna interakce viditelně mění stav a dokáže vysvětlit odpovědnost vlastních souborů. Toto je základ aplikace, ještě ne hudební MVP.
 
 ## M2 — ověřit první zvuk a vhodnost audio cesty
 
 **Cíl:** co nejdříve zjistit, zda zvolená technologie zvládne jednoduchý interaktivní tón.
+
+**Doporučený nejbližší úkol (22. 11. 2026)** je vypočítat vzorky čtvrtsekundového sinusového tónu o frekvenci 440 Hz a zkontrolovat jejich počet a rozsah hodnot v konzoli. Přehrávání naváže po ověření výpočtu.
 
 Učivo: zvukový vzorek, frekvence, amplituda, fáze, vzorkovací frekvence, buffer a latence. Buffer je blok dat připravených k přehrání; jeho velikost je jeden z faktorů ovlivňujících odezvu i riziko výpadků.
 
@@ -145,3 +145,4 @@ Po doloženém dokončení upravíme stav příslušného milníku a do této č
 - 21. 11. 2026 Michael potvrdil spuštění přes `./gradlew run`. Čtecí kontrola potvrdila Gradle Wrapper 9.7.0 a přeloženou třídu `MainKt` ve výstupu Gradlu. Dílčí úkol konzolového spuštění je hotový, M1 pokračuje přípravou prvního okna.
 - 22. 11. 2026 Michael potvrdil konzolové spuštění po zapojení Compose Compileru a Compose Runtime. Další dílčí cíl v M1 je ověřit otevření a zavření prvního desktopového okna.
 - 22. 11. 2026 Michael potvrdil otevření okna a zobrazení textu „Hello world!“. Čtecí kontrola potvrdila použití `singleWindowApplication` a `Text`. Ukončení aplikace po zavření okna zbývá ověřit.
+- 22. 11. 2026 Michael potvrdil kontrolu změny popisku na `Pressed`, ukončení po zavření okna a dalšího spuštění. Kód tlačítka a Gradle Wrapper jsou v commitu `df91203`.
