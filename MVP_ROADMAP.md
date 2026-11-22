@@ -1,6 +1,6 @@
 # MOP-01 — cesta k prvnímu MVP
 
-Datum založení: 27. 10. 2026. Stav k 30. 10. 2026: konzolový Kotlin/JVM program úspěšně přeložený a spuštěný, ignorování ověřené a základ nahraný na GitHub `michaelptacek05/mop-01`. `main` sleduje `origin/main`; při kontrole obě odpovídají commitu `1c81c76`. Následuje ruční přechod na Gradle. Okno a hudební implementace nezačaly. Kód i konfigurace píše Michael; mentor poskytuje vysvětlení a review podle [AGENTS.md](AGENTS.md). Kontext a rozlišení požadavků od doporučení jsou v [PROJECT_ANALYSIS.md](PROJECT_ANALYSIS.md).
+Roadmapa vznikla 27. 10. 2026. K 22. 11. 2026 Michael potvrdil otevření prvního okna Compose s textem. Další dílčí cíl je viditelná reakce na kliknutí. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md) a technické souvislosti v [PROJECT_ANALYSIS.md](PROJECT_ANALYSIS.md).
 
 ## Cíl a způsob postupu
 
@@ -15,7 +15,7 @@ Milníky níže jsou plán, nikoli dokončená práce. Návrhové detaily rozsah
 | Milník | Výsledek | Stav |
 | --- | --- | --- |
 | M0 — zadání a prostředí | Známé podmínky, potvrzená první technická cesta | Prostředí doplněno, technická cesta otevřená |
-| M1 — základ aplikace | Ručně založená a pochopená aplikace s oknem | Konzolový program, ignorování, commity a GitHub základ hotové; další krok Gradle, okno neimplementované |
+| M1 — základ aplikace | Ručně založená a pochopená aplikace s oknem | Otevření okna a zobrazení textu potvrzené. Následuje první interakce a ověření ukončení aplikace. |
 | M2 — první zvuk | Ověřená cesta od vlastního signálu k reproduktoru | Nezahájeno |
 | M3 — hratelný synth | Tóny, vstupy, hlasitost a životní cyklus fungují společně | Nezahájeno |
 | M4 — ověření MVP | Opakovatelně fungující desktopový nástroj | Nezahájeno |
@@ -30,8 +30,6 @@ Michael uvedl macOS 27.0, MacBook Pro s Apple M4 Pro, 24 GB RAM a vestavěné re
 
 **Hotovo, když:** je vybraná desktopová cesta, víme, na jakém zařízení ji ověřujeme, a Michael dokáže říct, co má dodat UI framework a co musí řešit zvuková vrstva.
 
-**Aktuální nejbližší úkol (2. 11. 2026):** Michaelova první konfigurace konzolového Gradle projektu je zkontrolovaná čtením: název projektu, Kotlin/JVM 2.4.21, `application`, Maven Central, JVM toolchain 26 a vstupní třída `MainKt`. Přesun zdroje do `src/main/kotlin/Main.kt` je ověřený, obsah zůstal zachovaný. Michael doplnil ignorování `.gradle`, `.kotlin` a `build`; účinek pravidel je ověřený, zdroje a build skripty ignorované nejsou. Sestavení přes Gradle zatím ověřené není. Další krok je zjistit současnou dostupnost Gradlu a stav propojení s IDE, připravit kompatibilní Gradle/Wrapper a ověřit konzolový běh před přidáváním UI a audia.
-
 ## M1 — pochopit a ručně založit základ aplikace
 
 **Cíl:** spustit vlastní jednoduché okno a rozumět tomu, co jej spouští.
@@ -40,9 +38,7 @@ Učivo průběžně podle potřeby: základní syntaxe Kotlinu, typy a nullabili
 
 Michael sám připraví projektové a build soubory. Případný oficiální generátor si zvolí vědomě; automaticky vytvořenou kostru budeme rozlišovat od jím napsané implementace. Pokud chce doslova ručně psát i veškerou kostru, zvolíme ruční založení. AI generátor nespouští a soubory nevytváří.
 
-Praktické pořadí pro současnou složku: spuštění konzolového základu, pravidla ignorování a první commit jsou ověřené; nyní přejít na Gradle s Kotlin DSL a reprodukovatelným sestavením, potom přidat Compose a první okno. To je plán postupných kroků, nikoli seznam úkolů k provedení najednou. Dokumentovaná kompatibilita pro první konzolový Gradle build byla ověřena pro kandidáta Gradle 9.7.0, Kotlin plugin 2.4.21 a JDK 26; praktické sestavení a kompatibilita s budoucím Compose zatím ověřené nejsou. Vyřešené problémy s IDE modulem a nastavení JDK jsou popsané v analýze.
-
-První kroky rozdělíme na spuštění prázdného okna, jednoduchý ovládací prvek a zobrazení změny stavu. Zvuk ještě nemusí být přítomen.
+**Doporučený nejbližší úkol (22. 11. 2026)** je přidat tlačítko, které po kliknutí změní text v okně. Při stejném spuštění lze ověřit, že se po zavření okna příkaz `./gradlew run` ukončí.
 
 **Hotovo, když:** aplikaci Michael opakovaně spustí a zavře, jedna interakce viditelně mění stav a dokáže vysvětlit odpovědnost vlastních souborů. Toto je základ aplikace, ještě ne hudební MVP.
 
@@ -146,3 +142,6 @@ Po doloženém dokončení upravíme stav příslušného milníku a do této č
 - 31. 10. 2026: Michael doplnil Kotlin/JVM plugin, `application` a Maven Central v `build.gradle.kts`. Zápis těchto bloků je při čtecím review správný; sestavení ještě neproběhlo. Nejbližší krok je explicitní JVM toolchain pro JDK 26.
 - 31. 10. 2026: JVM toolchain 26 a vstupní třída `MainKt` doplněné Michaelem a zkontrolované čtením. Byl vysvětlen rozdíl mezi názvem vlastnosti a hodnotou i odvození názvu JVM třídy ze souboru. Zdroj stále leží v `src/Main.kt`; dalším krokem je jeho přesun do standardního umístění Gradlu.
 - 31. 10. 2026: přesun do `src/main/kotlin/Main.kt` ověřený čtením souboru i Git statusem, který jej rozpoznává jako přejmenování/přesun. `.gradle` již existuje a není ignorovaná. Další úkol je doplnění `.gitignore` pro lokální data Gradlu/Kotlinu a build výstupy.
+- 21. 11. 2026 Michael potvrdil spuštění přes `./gradlew run`. Čtecí kontrola potvrdila Gradle Wrapper 9.7.0 a přeloženou třídu `MainKt` ve výstupu Gradlu. Dílčí úkol konzolového spuštění je hotový, M1 pokračuje přípravou prvního okna.
+- 22. 11. 2026 Michael potvrdil konzolové spuštění po zapojení Compose Compileru a Compose Runtime. Další dílčí cíl v M1 je ověřit otevření a zavření prvního desktopového okna.
+- 22. 11. 2026 Michael potvrdil otevření okna a zobrazení textu „Hello world!“. Čtecí kontrola potvrdila použití `singleWindowApplication` a `Text`. Ukončení aplikace po zavření okna zbývá ověřit.

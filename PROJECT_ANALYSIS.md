@@ -1,6 +1,6 @@
 # MOP-01 — prvotní analýza projektu
 
-Datum založení analýzy: 27. 10. 2026. Aktuální stav k 30. 10. 2026: konzolový Kotlin/JVM program je úspěšně přeložený a spuštěný, pravidla ignorování jsou ověřená, první commit je `b0a3939` (`initial commit`). GitHub základ je připojený přes `origin` na `https://github.com/michaelptacek05/mop-01.git`; lokální `main` sleduje `origin/main` a při kontrole odpovídá commitu `1c81c76` (`uprava md`). Následuje ruční konfigurace Gradlu; desktopové okno a audio zatím nejsou implementované. Pracovní název vychází z názvu složky; finální název produktu není rozhodnutý. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md), postup v [MVP_ROADMAP.md](MVP_ROADMAP.md).
+Analýza vznikla 27. 10. 2026. K 21. 11. 2026 Michael potvrdil spuštění konzolové aplikace Kotlin/JVM přes Gradle Wrapper. Další dílčí cíl je první desktopové okno. Pracovní název vychází z názvu složky, název produktu zůstává otevřený. Pravidla spolupráce jsou v [AGENTS.md](AGENTS.md) a postup v [MVP_ROADMAP.md](MVP_ROADMAP.md).
 
 ## 1. Vize a potvrzené zadání
 
@@ -124,6 +124,10 @@ Zdroj zůstává v `src/Main.kt`, zatímco výchozí umístění Kotlin zdrojů 
 Následné ověření 31. 10. 2026: Michael přesun dokončil. Ve zdrojovém stromu je jediný `Main.kt` na cestě `src/main/kotlin/Main.kt`, obsah konzolového programu zůstal zachovaný a Git přesun rozpoznává. V pracovním stromu se již objevila `.gradle`, kterou současný `.gitignore` nepokrývá. Její existence sama nedokládá úspěšné sestavení nebo synchronizaci. Další malý úkol je doplnit ignorování `.gradle`, `.kotlin` a `build`; pravidla napíše Michael. [Adresáře Gradlu](https://docs.gradle.org/current/userguide/directory_layout.html), [lokální data Kotlin pluginu](https://kotlinlang.org/docs/gradle-configure-project.html#kotlin-gradle-plugin-data-in-a-project)
 
 Ověření 2. 11. 2026: Michael doplnil `.gitignore` o `.gradle`, `.kotlin` a `build`. Čtecí kontrola pomocí `git check-ignore --no-index -v` potvrdila odpovídající pravidla pro cesty uvnitř všech tří adresářů; zdrojový soubor a oba build skripty pravidlům nepodléhají. Adresáře nejsou v Git indexu a `.gradle` se již neobjevuje mezi nesledovanými soubory. Další krok je dostupnost kompatibilního Gradlu/Wrapperu a propojení s IDE; úspěšné sestavení zatím doložené není.
+
+Dne 21. 11. 2026 Michael potvrdil spuštění konzolového programu příkazem `./gradlew run`. Konfigurace Wrapperu určuje Gradle 9.7.0, build používá Kotlin 2.4.21 a JDK 26. Čtecí kontrola našla `MainKt.class` ve výstupu Gradlu `build/classes/kotlin/main/`. Jde o ověření konzolového spuštění v terminálu. Ověření Compose zůstává otevřené.
+
+Dne 22. 11. 2026 Michael potvrdil konzolové spuštění s pluginem Compose Compiler 2.4.21 a Compose Runtime 1.12.2. Samotný plugin při překladu hlásil chybějící runtime. Projekt nyní používá také Google Maven, odkud Gradle bere navazující závislost AndroidX Compose Runtime. Další praktické ověření je otevření a zavření desktopového okna na macOS.
 
 ## 3. Co má první MVP přinést
 
