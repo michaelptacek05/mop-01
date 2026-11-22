@@ -44,7 +44,9 @@ Michael sám připraví projektové a build soubory. Případný oficiální gen
 
 **Cíl:** co nejdříve zjistit, zda zvolená technologie zvládne jednoduchý interaktivní tón.
 
-**Doporučený nejbližší úkol (22. 11. 2026)** je vypočítat vzorky čtvrtsekundového sinusového tónu o frekvenci 440 Hz a zkontrolovat jejich počet a rozsah hodnot v konzoli. Přehrávání naváže po ověření výpočtu.
+Příprava před audiem je ověřená. `main` otevírá okno, samostatná funkce Compose vykresluje obsah a vlastní stav tlačítka. Návrh hranic je v [projektové analýze](PROJECT_ANALYSIS.md#5-hranice-odpovědností).
+
+**První zvukový úkol** je vypočítat vzorky čtvrtsekundového sinusového tónu o frekvenci 440 Hz a zkontrolovat jejich počet a rozsah hodnot v konzoli. Přehrávání naváže po ověření výpočtu.
 
 Učivo: zvukový vzorek, frekvence, amplituda, fáze, vzorkovací frekvence, buffer a latence. Buffer je blok dat připravených k přehrání; jeho velikost je jeden z faktorů ovlivňujících odezvu i riziko výpadků.
 
@@ -146,3 +148,4 @@ Po doloženém dokončení upravíme stav příslušného milníku a do této č
 - 22. 11. 2026 Michael potvrdil konzolové spuštění po zapojení Compose Compileru a Compose Runtime. Další dílčí cíl v M1 je ověřit otevření a zavření prvního desktopového okna.
 - 22. 11. 2026 Michael potvrdil otevření okna a zobrazení textu „Hello world!“. Čtecí kontrola potvrdila použití `singleWindowApplication` a `Text`. Ukončení aplikace po zavření okna zbývá ověřit.
 - 22. 11. 2026 Michael potvrdil kontrolu změny popisku na `Pressed`, ukončení po zavření okna a dalšího spuštění. Kód tlačítka a Gradle Wrapper jsou v commitu `df91203`.
+- 22. 11. 2026 Michael ověřil spuštění po oddělení obsahu okna a stavu tlačítka do samostatné funkce Compose v `Window.kt`.

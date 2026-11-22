@@ -178,6 +178,12 @@ Zpočátku jde o myšlenkové oddělení, nikoli požadavek na mnoho modulů a r
 | Pozdější sekvencer a časová osa | Určují, kdy se mají noty nebo klipy přehrát a jak jsou uspořádané ve stopách |
 | Integrace se systémem | Otevře a zavře audio prostředky, reaguje na životní cyklus okna |
 
+Michael chce před prvním audio experimentem nastavit hranice v kódu. Návrh pro současnou velikost projektu:
+
+- Vstupní bod otevírá okno a připojuje jeho obsah. Obsah okna má vlastní composable, tedy funkci Compose popisující část rozhraní. Samostatná komponenta dává smysl, když má vlastní odpovědnost nebo konkrétní důvod ke znovupoužití.
+- Stav má jednoho vlastníka. Stav jednoho místa zůstává u něj. Když hodnotu potřebuje více komponent, vlastní ji jejich nejbližší společný rodič. Komponenty dostávají hodnoty ke zobrazení a oznamují akce přes callbacky. Odvozená hodnota se počítá ze zdrojového stavu. Samostatný správce stavu má smysl, když se pravidla změn nebo životní cyklus stavu oddělí od jedné obrazovky. [Compose: umístění stavu](https://developer.android.com/develop/ui/compose/state-hoisting)
+- Výpočet zvukových vzorků patří do obyčejného Kotlin kódu bez závislosti na Compose. Přehrávání a uvolnění zvukového zařízení mají vlastní odpovědnost. Pro první experiment stačí jeden Gradle modul.
+
 Tvorba zvukových vzorků nesmí záviset na rychlosti překreslování UI. UI událost vyjadřuje záměr zahrát; souvislý průběh zvuku má vlastní časování. Do cesty, která musí pravidelně dodávat zvuk, nepatří čekání na síť, dlouhé operace ani zbytečné blokování.
 
 Pro malou monofonní aplikaci není potřeba obecný pluginový systém nebo framework pro všechny budoucí enginy. Oddělovat budeme to, co už má konkrétní odpovědnost nebo se obtížně ověřuje.
